@@ -22,10 +22,12 @@ public class CreateData {
             public void perform(EntityManager em) {
                 Company megabank = persist(em, new Company(nextId(rnd), "MegaBank Equity Sales"));
                 Company oldfellows = persist(em, new Company(nextId(rnd), "Oldfellows Brokerage"));
-                Company quant = persist(em, new Company(nextId(rnd), "MIQ Quant Wizardry"));
+                Company quant = persist(em, new Company(nextId(rnd), "OMG Quant Wizardry"));
                 persistNewAuthor(em, rnd, "John Q. Pinstripe", megabank);
                 persistNewAuthor(em, rnd, "Gunther von Domicile", megabank);
+                persistNewAuthor(em, rnd, "Pierre A. Baguette", megabank);
                 persistNewAuthor(em, rnd, "Godfrey Smith-Smythe", oldfellows);
+                persistNewAuthor(em, rnd, "Archibald Cholmondley", oldfellows);
                 persistNewAuthor(em, rnd, "TRADEROBOT 9000", quant);
                 persistNewAuthor(em, rnd, "TRADEROBOT YMP", quant);
                 persistNewAuthor(em, rnd, "TRADEROBOT R2", quant);
