@@ -60,4 +60,9 @@ public class Idea {
         this.date = date;
     }
     
+    @Override
+    public String toString() {
+        return "Idea {id = " + id + ", author = " + author.getId() + ", stockTicker = " + stockTicker + ", investment = " + investment + ", date = " + date + "}";
+    }
+    
 }
