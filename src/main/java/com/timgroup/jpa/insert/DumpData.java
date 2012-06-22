@@ -1,7 +1,5 @@
 package com.timgroup.jpa.insert;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -21,14 +19,12 @@ public class DumpData {
                 dump(em, Author.class);
                 dump(em, Idea.class);
             }
-
+            
             private <T> void dump(EntityManager em, Class<T> entityClass) {
                 TypedQuery<T> all = em.createQuery("select e from " + entityClass.getName() + " e", entityClass);
-                List<T> results = all.getResultList();
-                for (T result : results) {
-                    System.out.println(result);
-                }
+                PersistenceUnit.dumpQueryResults(all);
             }
+            
         });
     }
     
