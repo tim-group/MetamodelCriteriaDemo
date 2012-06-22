@@ -4,3 +4,4 @@ syntax: glob
 .project
 .settings
 build
+*_.java

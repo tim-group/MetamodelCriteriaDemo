@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 
 configurations {
     hibernatetool
+    jpamodelgen
 }
 
 repositories {
@@ -23,6 +24,8 @@ dependencies {
     hibernatetool group: 'org.hibernate', name: 'hibernate-entitymanager', version: '3.6.10.Final'
     hibernatetool group: 'org.slf4j', name: 'slf4j-simple', version: slf4jVersion
     hibernatetool group: 'org.slf4j', name: 'jcl-over-slf4j', version: slf4jVersion
+    
+    jpamodelgen group: 'org.hibernate', name: 'hibernate-jpamodelgen', version: '1.2.0.Final'
 }
 
 def persistenceUnit = "com.timgroup.jpa"
@@ -33,6 +36,16 @@ def db = [
     url: "jdbc:h2:build/db/${persistenceUnit}", 
     driver: "org.h2.Driver"
 ]
+
+task generateMetamodel(type: Compile) {
+    source = sourceSets.main.java
+    classpath = configurations.compile + configurations.jpamodelgen
+    options.compilerArgs = [
+        "-proc:only"
+    ]
+    destinationDir = sourceSets.main.java.srcDirs.iterator().next()
+}
+compileJava.dependsOn generateMetamodel
 
 task generateSql(dependsOn: classes) << {
     ant.taskdef(name: 'hibernatetool',
