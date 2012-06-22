@@ -55,7 +55,6 @@ public class CreateData {
             tickers.add(ticker);
         }
         else {
-            System.out.println("reusing ticker");
             ticker = tickers.get(rnd.nextInt(tickers.size()));
         }
         return ticker;
