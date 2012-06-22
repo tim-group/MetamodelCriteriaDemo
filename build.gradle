@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.1.Final'
+    
     runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.4.Final'
     
     hibernatetool group: 'org.hibernate', name: 'hibernate-tools', version: '3.2.4.GA'
@@ -25,9 +26,11 @@ eclipse {
     }
 }
 
-File entitySqlFile = new File(project.buildDir, 'sql/entities.sql')
+def persistenceUnit = "com.timgroup.jpa"
 
-task ddl(dependsOn: classes) << {
+File entitySqlFile = new File(project.buildDir, "sql/${persistenceUnit}.sql")
+
+task generateSql(dependsOn: classes) << {
     // here be cargo cult programming
     ant.taskdef(name: 'hibernatetool',
         classname: 'org.hibernate.tool.ant.HibernateToolTask',
@@ -35,7 +38,7 @@ task ddl(dependsOn: classes) << {
         )
     entitySqlFile.parentFile.mkdirs()
     ant.hibernatetool(destdir: entitySqlFile.parentFile) {
-        jpaconfiguration()
+        jpaconfiguration(persistenceunit: persistenceUnit)
         hbm2ddl(export: false, outputfilename: entitySqlFile.name, format: true)
         classpath { pathelement( path: sourceSets.main.output.asPath ) }
     }
