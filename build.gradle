@@ -21,15 +21,14 @@ dependencies {
     hibernatetool group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.6.6'
 }
 
-eclipse {
-    classpath {
-        defaultOutputDir = new File(project.buildDir, 'eclipse')
-    }
-}
-
 def persistenceUnit = "com.timgroup.jpa"
 
-File entitySqlFile = new File(project.buildDir, "sql/${persistenceUnit}.sql")
+def entitySqlFile = new File(project.buildDir, "sql/${persistenceUnit}.sql")
+
+def db = [
+    url: "jdbc:h2:build/db/${persistenceUnit}", 
+    driver: "org.h2.Driver"
+]
 
 task generateSql(dependsOn: classes) << {
     // here be cargo cult programming
@@ -45,15 +44,18 @@ task generateSql(dependsOn: classes) << {
     }
 }
 
-def dbUrl = "jdbc:h2:build/db/${persistenceUnit}"
-def dbDriver = 'org.h2.Driver'
-
 task applySql(dependsOn: generateSql) << {
     // this is needed to get the H2 driver onto the Groovy classpath - and it has to be the Groovy classpath, not the build script one
-    URLClassLoader loader = GroovyObject.class.classLoader
+    def loader = GroovyObject.class.classLoader
     configurations.runtime.each {File file ->
         loader.addURL(file.toURI().toURL())
     }
-    def sql = groovy.sql.Sql.newInstance(dbUrl, null, null, dbDriver)
+    def sql = groovy.sql.Sql.newInstance(db.url, null, null, db.driver)
     sql.execute(entitySqlFile.text)
+}
+
+eclipse {
+    classpath {
+        defaultOutputDir = new File(project.buildDir, 'eclipse')
+    }
 }
