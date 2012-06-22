@@ -1,0 +1,17 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.1.Final'
+    runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.4.Final'
+}
+
+eclipse {
+    classpath {
+        defaultOutputDir = new File(project.buildDir, 'eclipse')
+    }
+}
