@@ -1,6 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
+configurations {
+    hibernatetool
+}
+
 repositories {
     mavenCentral()
 }
@@ -8,10 +12,30 @@ repositories {
 dependencies {
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.1.Final'
     runtime group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.4.Final'
+    
+    hibernatetool group: 'org.hibernate', name: 'hibernate-tools', version: '3.2.4.GA'
+    hibernatetool group: 'org.hibernate', name: 'hibernate-entitymanager', version: '3.6.10.Final'
+    hibernatetool group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.6'
+    hibernatetool group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.6.6'
 }
 
 eclipse {
     classpath {
         defaultOutputDir = new File(project.buildDir, 'eclipse')
+    }
+}
+
+task ddl(dependsOn: classes) << {
+    // here be cargo cult programming
+    ant.taskdef(name: 'hibernatetool',
+        classname: 'org.hibernate.tool.ant.HibernateToolTask',
+        classpath: configurations.hibernatetool.asPath
+        )
+    def sqlDir = new File(project.buildDir, 'sql')
+    sqlDir.mkdirs()
+    ant.hibernatetool(destdir: sqlDir) {
+        jpaconfiguration()
+        hbm2ddl(export: false, outputfilename: 'entities.sql', format: true)
+        classpath { pathelement( path: sourceSets.main.output.asPath ) }
     }
 }
