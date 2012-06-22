@@ -35,11 +35,10 @@ def db = [
 ]
 
 task generateSql(dependsOn: classes) << {
-    // here be cargo cult programming
     ant.taskdef(name: 'hibernatetool',
         classname: 'org.hibernate.tool.ant.HibernateToolTask',
         classpath: configurations.hibernatetool.asPath
-        )
+    )
     entitySqlFile.parentFile.mkdirs()
     ant.hibernatetool(destdir: entitySqlFile.parentFile) {
         jpaconfiguration(persistenceunit: persistenceUnit)
@@ -47,6 +46,7 @@ task generateSql(dependsOn: classes) << {
         classpath { pathelement( path: sourceSets.main.output.asPath ) }
     }
 }
+assemble.dependsOn generateSql
 
 task applySql(dependsOn: generateSql) << {
     // this is needed to get the H2 driver onto the Groovy classpath - and it has to be the Groovy classpath, not the build script one
