@@ -25,17 +25,18 @@ eclipse {
     }
 }
 
+File entitySqlFile = new File(project.buildDir, 'sql/entities.sql')
+
 task ddl(dependsOn: classes) << {
     // here be cargo cult programming
     ant.taskdef(name: 'hibernatetool',
         classname: 'org.hibernate.tool.ant.HibernateToolTask',
         classpath: configurations.hibernatetool.asPath
         )
-    def sqlDir = new File(project.buildDir, 'sql')
-    sqlDir.mkdirs()
-    ant.hibernatetool(destdir: sqlDir) {
+    entitySqlFile.parentFile.mkdirs()
+    ant.hibernatetool(destdir: entitySqlFile.parentFile) {
         jpaconfiguration()
-        hbm2ddl(export: false, outputfilename: 'entities.sql', format: true)
+        hbm2ddl(export: false, outputfilename: entitySqlFile.name, format: true)
         classpath { pathelement( path: sourceSets.main.output.asPath ) }
     }
 }
