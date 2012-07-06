@@ -5,3 +5,4 @@ syntax: glob
 .settings
 build
 *_.java
+Q*.java
