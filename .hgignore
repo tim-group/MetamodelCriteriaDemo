@@ -6,3 +6,4 @@ syntax: glob
 build
 *_.java
 Q*.java
+.eclipse

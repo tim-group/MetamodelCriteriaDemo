@@ -98,6 +98,6 @@ task applySql(dependsOn: generateSql) << {
 
 eclipse {
     classpath {
-        defaultOutputDir = new File(project.buildDir, 'eclipse')
+        defaultOutputDir = file('.eclipse')
     }
 }
