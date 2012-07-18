@@ -62,7 +62,7 @@ public class Idea {
     
     @Override
     public String toString() {
-        return "Idea {id = " + id + ", author = " + author.getId() + ", stockTicker = " + stockTicker + ", investment = " + investment + ", date = " + date + "}";
+        return "Idea {id = " + id + ", author = " + author.getName() + ", stockTicker = " + stockTicker + ", investment = " + investment + ", date = " + date + "}";
     }
     
 }

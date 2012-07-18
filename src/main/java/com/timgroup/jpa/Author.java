@@ -51,7 +51,7 @@ public class Author {
     
     @Override
     public String toString() {
-        return "Author {id = " + id + ", name = " + name + ", company = " + company.getId() + "}";
+        return "Author {id = " + id + ", name = " + name + ", company = " + company.getName() + "}";
     }
     
 }
