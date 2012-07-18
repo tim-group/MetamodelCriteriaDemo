@@ -9,10 +9,9 @@ public abstract class Query extends Statement {
     
     @Override
     public void execute(EntityManager em) {
-        TypedQuery<Idea> query = query(em);
-        dumpQueryResults(query);
+        dumpQueryResults(findIdeasOnAParticularStock(em));
     }
     
-    public abstract TypedQuery<Idea> query(EntityManager em);
+    public abstract TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em);
     
 }

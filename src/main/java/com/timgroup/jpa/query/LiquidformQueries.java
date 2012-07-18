@@ -13,7 +13,7 @@ import static com.google.code.liquidform.LiquidForm.select;
 public class LiquidformQueries extends Query {
     
     @Override
-    public TypedQuery<Idea> query(EntityManager em) {
+    public TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em) {
         Idea i = alias(Idea.class, "i");
         SubQuery<Idea> q = select(i).from(Idea.class).as(i).where(eq(i.getStockTicker(), "NXJ"));
         return em.createQuery(q.toString(), Idea.class);

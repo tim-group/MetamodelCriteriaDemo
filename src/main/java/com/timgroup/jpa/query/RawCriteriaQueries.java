@@ -11,7 +11,7 @@ import com.timgroup.jpa.Idea;
 public class RawCriteriaQueries extends Query {
     
     @Override
-    public TypedQuery<Idea> query(EntityManager em) {
+    public TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Idea> cq = cb.createQuery(Idea.class);
         Root<Idea> idea = cq.from(Idea.class);

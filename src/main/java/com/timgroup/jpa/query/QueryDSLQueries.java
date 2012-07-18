@@ -10,7 +10,7 @@ import com.timgroup.jpa.QIdea;
 public class QueryDSLQueries extends Query {
     
     @Override
-    public TypedQuery<Idea> query(EntityManager em) {
+    public TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em) {
         QIdea idea = QIdea.idea;
         JPAQuery dslQuery = new JPAQuery(em).from(idea).where(idea.stockTicker.eq("NXJ"));
         return (TypedQuery<Idea>) dslQuery.createQuery(idea);

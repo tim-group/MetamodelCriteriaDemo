@@ -14,7 +14,7 @@ import static com.google.code.liquidform.LiquidForm.eq;
 public class TartedUpLiquidformQueries extends Query {
     
     @Override
-    public TypedQuery<Idea> query(EntityManager em) {
+    public TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em) {
         Idea i = anInstanceOf(Idea.class);
         SubQuery<Idea> q = select(i).where(eq(i.getStockTicker(), "NXJ"));
         return toQuery(em, q, Idea.class);
