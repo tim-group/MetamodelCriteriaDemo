@@ -41,8 +41,10 @@ The simple names of classes you can run are:
 	Dumps the contents of the database
 ``JPQLQueries``
 	Queries written in JPQL
+``RawCriteriaQueries``
+	Queries written using the JPA criteria API and dynamic properties
 ``MetamodelCriteriaQueries``
-	Queries written using the JPA static metamodel and criteria API
+	Queries written using the JPA criteria API and the static metamodel
 ``LiquidformQueries``
 	Queries written using LIQUidFORM
 ``TartedUpLiquidformQueries``
