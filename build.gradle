@@ -51,7 +51,7 @@ def db = [
     driver: "org.h2.Driver"
 ]
 
-task generateMetamodel(type: Compile) {
+task generateMetamodel(type: Compile, group: 'build', description: 'Generates the JPA2 static metamodel classes') {
     source = sourceSets.main.java
     classpath = configurations.compile + configurations.jpamodelgen
     options.compilerArgs = [
@@ -61,7 +61,7 @@ task generateMetamodel(type: Compile) {
 }
 compileJava.dependsOn generateMetamodel
 
-task generateQueryDSL(type: Compile) {
+task generateQueryDSL(type: Compile, group: 'build', description: 'Generates the QueryDSL query types') {
 	source = sourceSets.main.java
 	classpath = configurations.compile + configurations.querydsl
 	options.compilerArgs = [
@@ -72,7 +72,7 @@ task generateQueryDSL(type: Compile) {
 }
 compileJava.dependsOn generateQueryDSL
 
-task generateSql(dependsOn: classes) << {
+task generateSql(dependsOn: classes, group: 'build', description: 'Generates SQL DDL for the entity classes') << {
     ant.taskdef(name: 'hibernatetool',
         classname: 'org.hibernate.tool.ant.HibernateToolTask',
         classpath: configurations.hibernatetool.asPath
@@ -86,7 +86,7 @@ task generateSql(dependsOn: classes) << {
 }
 assemble.dependsOn generateSql
 
-task applySql(dependsOn: generateSql) << {
+task applySql(dependsOn: generateSql, group: 'deploy', description: 'Applies the SQL DDL for the entity classes to an H2 database in the build directory') << {
     // this is needed to get the H2 driver onto the Groovy classpath - and it has to be the Groovy classpath, not the build script one
     def loader = GroovyObject.class.classLoader
     configurations.runtime.each {File file ->
