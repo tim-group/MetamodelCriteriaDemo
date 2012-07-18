@@ -9,7 +9,7 @@ import javax.persistence.criteria.Root;
 import com.timgroup.jpa.Idea;
 import com.timgroup.jpa.Idea_;
 
-public class MetamodelCriteriaQueries extends Queries {
+public class MetamodelCriteriaQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {

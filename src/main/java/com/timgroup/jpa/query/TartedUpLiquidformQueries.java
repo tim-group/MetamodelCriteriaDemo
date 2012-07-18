@@ -11,7 +11,7 @@ import com.timgroup.jpa.Idea;
 import static com.google.code.liquidform.LiquidForm.alias;
 import static com.google.code.liquidform.LiquidForm.eq;
 
-public class TartedUpLiquidformQueries extends Queries {
+public class TartedUpLiquidformQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {

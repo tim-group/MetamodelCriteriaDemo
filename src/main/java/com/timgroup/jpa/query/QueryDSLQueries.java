@@ -7,7 +7,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.timgroup.jpa.Idea;
 import com.timgroup.jpa.QIdea;
 
-public class QueryDSLQueries extends Queries {
+public class QueryDSLQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {

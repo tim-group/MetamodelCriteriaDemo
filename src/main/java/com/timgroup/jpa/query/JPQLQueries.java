@@ -5,7 +5,7 @@ import javax.persistence.TypedQuery;
 
 import com.timgroup.jpa.Idea;
 
-public class JPQLQueries extends Queries {
+public class JPQLQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {

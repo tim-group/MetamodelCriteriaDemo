@@ -10,7 +10,7 @@ import static com.google.code.liquidform.LiquidForm.alias;
 import static com.google.code.liquidform.LiquidForm.eq;
 import static com.google.code.liquidform.LiquidForm.select;
 
-public class LiquidformQueries extends Queries {
+public class LiquidformQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {

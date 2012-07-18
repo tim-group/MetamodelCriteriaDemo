@@ -8,7 +8,7 @@ import javax.persistence.criteria.Root;
 
 import com.timgroup.jpa.Idea;
 
-public class RawCriteriaQueries extends Queries {
+public class RawCriteriaQueries extends Query {
     
     @Override
     public TypedQuery<Idea> query(EntityManager em) {
