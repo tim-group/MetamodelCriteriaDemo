@@ -14,6 +14,11 @@ public abstract class Query extends Statement {
                 dumpQueryResults(findIdeasOnAParticularStock(em));
             }
         });
+        attempt("findIdeasWithBigInvestments", new Runnable() {
+            @Override public void run() {
+                dumpQueryResults(findIdeasWithBigInvestments(em));
+            }
+        });
     }
     
     private void attempt(String name, Runnable feat) {
@@ -28,5 +33,7 @@ public abstract class Query extends Statement {
     }
     
     public abstract TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em);
+    
+    public abstract TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em);
     
 }

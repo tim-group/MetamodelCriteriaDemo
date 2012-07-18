@@ -19,5 +19,14 @@ public class MetamodelCriteriaQueries extends Query {
         cq.select(idea).where(cb.equal(idea.get(Idea_.stockTicker), "NXJ"));
         return em.createQuery(cq);
     }
+
+    @Override
+    public TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Idea> cq = cb.createQuery(Idea.class);
+        Root<Idea> idea = cq.from(Idea.class);
+        cq.select(idea).where(cb.gt(idea.get(Idea_.investment), 1500000));
+        return em.createQuery(cq);
+    }
     
 }

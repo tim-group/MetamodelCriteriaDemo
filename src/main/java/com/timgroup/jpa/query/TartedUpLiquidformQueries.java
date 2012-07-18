@@ -10,6 +10,7 @@ import com.timgroup.jpa.Idea;
 
 import static com.google.code.liquidform.LiquidForm.alias;
 import static com.google.code.liquidform.LiquidForm.eq;
+import static com.google.code.liquidform.LiquidForm.gt;
 
 public class TartedUpLiquidformQueries extends Query {
     
@@ -17,6 +18,13 @@ public class TartedUpLiquidformQueries extends Query {
     public TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em) {
         Idea i = anInstanceOf(Idea.class);
         SubQuery<Idea> q = select(i).where(eq(i.getStockTicker(), "NXJ"));
+        return toQuery(em, q, Idea.class);
+    }
+    
+    @Override
+    public TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em) {
+        Idea i = anInstanceOf(Idea.class);
+        SubQuery<Idea> q = select(i).where(gt(i.getInvestment(), 1500000));
         return toQuery(em, q, Idea.class);
     }
     
@@ -34,5 +42,5 @@ public class TartedUpLiquidformQueries extends Query {
     private static <T> TypedQuery<T> toQuery(EntityManager em, SubQuery<T> q, Class<T> resultClass) {
         return em.createQuery(q.toString(), resultClass);
     }
-    
+
 }
