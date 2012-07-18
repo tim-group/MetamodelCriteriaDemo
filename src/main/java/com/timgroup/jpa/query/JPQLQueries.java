@@ -3,6 +3,7 @@ package com.timgroup.jpa.query;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.timgroup.jpa.Author;
 import com.timgroup.jpa.Idea;
 
 public class JPQLQueries extends Query {
@@ -15,6 +16,11 @@ public class JPQLQueries extends Query {
     @Override
     public TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em) {
         return em.createQuery("select i from Idea i where i.investment > 1500000", Idea.class);
+    }
+    
+    @Override
+    public TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em) {
+        return em.createQuery("select a from Author a join a.ideas i where i.stockTicker = 'NXJ'", Author.class);
     }
     
 }

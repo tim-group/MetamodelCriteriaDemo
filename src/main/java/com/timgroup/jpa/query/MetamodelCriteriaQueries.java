@@ -6,6 +6,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.timgroup.jpa.Author;
+import com.timgroup.jpa.Author_;
 import com.timgroup.jpa.Idea;
 import com.timgroup.jpa.Idea_;
 
@@ -26,6 +28,15 @@ public class MetamodelCriteriaQueries extends Query {
         CriteriaQuery<Idea> cq = cb.createQuery(Idea.class);
         Root<Idea> idea = cq.from(Idea.class);
         cq.select(idea).where(cb.gt(idea.get(Idea_.investment), 1500000));
+        return em.createQuery(cq);
+    }
+    
+    @Override
+    public TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Author> cq = cb.createQuery(Author.class);
+        Root<Author> author = cq.from(Author.class);
+        cq.select(author).where(cb.equal(author.join(Author_.ideas).get(Idea_.stockTicker), "NXJ"));
         return em.createQuery(cq);
     }
     

@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.google.code.liquidform.SubQuery;
+import com.timgroup.jpa.Author;
 import com.timgroup.jpa.Idea;
 
 import static com.google.code.liquidform.LiquidForm.alias;
@@ -19,12 +20,20 @@ public class LiquidformQueries extends Query {
         SubQuery<Idea> q = select(i).from(Idea.class).as(i).where(eq(i.getStockTicker(), "NXJ"));
         return em.createQuery(q.toString(), Idea.class);
     }
-
+    
     @Override
     public TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em) {
         Idea i = alias(Idea.class, "i");
         SubQuery<Idea> q = select(i).from(Idea.class).as(i).where(gt(i.getInvestment(), 1500000));
         return em.createQuery(q.toString(), Idea.class);
+    }
+    
+    @Override
+    public TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em) {
+        Author a = alias(Author.class, "a");
+        Idea i = alias(a.getIdeas(), "i");
+        SubQuery<Author> q = select(a).from(Author.class).as(a).innerJoin(a.getIdeas()).as(i).where(eq(i.getStockTicker(), "NXJ"));
+        return em.createQuery(q.toString(), Author.class);
     }
     
 }

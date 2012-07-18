@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import com.timgroup.jpa.Author;
 import com.timgroup.jpa.Idea;
 
 public abstract class Query extends Statement {
@@ -13,11 +14,12 @@ public abstract class Query extends Statement {
     public void execute(final EntityManager em) {
         attempt("findIdeasOnAParticularStock", em);
         attempt("findIdeasWithBigInvestments", em);
+        attempt("findAuthorsOfIdeasOnAParticularStock", em);
     }
     
     private void attempt(String name, EntityManager em) {
         System.out.println(name);
-        System.out.println("===========================");
+        System.out.println("================================================================================");
         System.out.flush();
         try {
             Method method = getClass().getDeclaredMethod(name, EntityManager.class);
@@ -33,5 +35,7 @@ public abstract class Query extends Statement {
     public abstract TypedQuery<Idea> findIdeasOnAParticularStock(EntityManager em);
     
     public abstract TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em);
+    
+    public abstract TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em);
     
 }

@@ -1,11 +1,14 @@
 package com.timgroup.jpa.query;
 
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import com.google.code.liquidform.FromClause;
 import com.google.code.liquidform.LiquidForm;
 import com.google.code.liquidform.SubQuery;
+import com.timgroup.jpa.Author;
 import com.timgroup.jpa.Idea;
 
 import static com.google.code.liquidform.LiquidForm.alias;
@@ -28,6 +31,14 @@ public class TartedUpLiquidformQueries extends Query {
         return toQuery(em, q, Idea.class);
     }
     
+    @Override
+    public TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em) {
+        Author a = anInstanceOf(Author.class);
+        Idea i = alias(a.getIdeas(), "i");
+        SubQuery<Author> q = select(a).innerJoin(a.getIdeas()).as(i).where(eq(i.getStockTicker(), "NXJ"));
+        return em.createQuery(q.toString(), Author.class);
+    }
+
     private static <T> T anInstanceOf(Class<T> entityClass) {
         String label = entityClass.getName().substring(0, 1).toLowerCase();
         return alias(entityClass, label);
