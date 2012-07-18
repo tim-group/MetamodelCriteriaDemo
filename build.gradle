@@ -97,9 +97,9 @@ task applySql(dependsOn: generateSql, group: 'deploy', description: 'Applies the
     sql.execute(entitySqlFile.text)
 }
 
-mainClassName = 'com.timgroup.jpa.query.RunQueries'
+mainClassName = 'com.timgroup.jpa.query.Run'
 startScripts {
-    applicationName = mainClassName.substring(mainClassName.lastIndexOf('.') + 1)
+    applicationName = 'run'
 }
 
 eclipse {

@@ -1,14 +1,12 @@
 package com.timgroup.jpa;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,13 +55,6 @@ public class PersistenceUnit {
             em.close();
         } catch (Exception e) {
             LOGGER.error("error closing entity manager", e);
-        }
-    }
-    
-    public static <T> void dumpQueryResults(TypedQuery<T> query) {
-        List<T> results = query.getResultList();
-        for (T result : results) {
-            System.out.println(result);
         }
     }
     
