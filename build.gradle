@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'application'
 
 configurations {
     hibernatetool
@@ -94,6 +95,11 @@ task applySql(dependsOn: generateSql, group: 'deploy', description: 'Applies the
     }
     def sql = groovy.sql.Sql.newInstance(db.url, null, null, db.driver)
     sql.execute(entitySqlFile.text)
+}
+
+mainClassName = 'com.timgroup.jpa.query.RunQueries'
+startScripts {
+    applicationName = mainClassName.substring(mainClassName.lastIndexOf('.') + 1)
 }
 
 eclipse {
