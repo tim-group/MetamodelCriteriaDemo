@@ -63,12 +63,12 @@ public class CreateData {
     private static char randomChar(Random rnd) {
         return (char) ('A' + rnd.nextInt('Z' - 'A'));
     }
-
+    
     protected static <T> T persist(EntityManager em, T entity) {
         em.persist(entity);
         return entity;
     }
-
+    
     private static int nextId(final Random rnd) {
         return Math.abs(rnd.nextInt());
     }

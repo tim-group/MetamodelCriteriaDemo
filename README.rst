@@ -24,16 +24,21 @@ Programs you can run are:
 	Inserts a load of test data into the database
 ``com.timgroup.jpa.insert.DumpData``
 	Dumps the contents of the database
-`com.timgroup.jpa.query.JPQLQueries`
-	Runs queries written in JPQL
-`com.timgroup.jpa.query.MetamodelCriteriaQueries`
-	Runs queries written using the JPA static metamodel and criteria API
-`com.timgroup.jpa.query.LiquidformQueries`
-	Runs queries written using LIQUidFORM
-`com.timgroup.jpa.query.TartedUpLiquidformQueries`
-	Runs queries written using LIQUidFORM with a couple of helper functions to make them read better
-`com.timgroup.jpa.query.QueryDSLQueries`
-	Runs queries written using QueryDSL
+``com.timgroup.jpa.query.RunQueries``
+	Runs queries and prints the results; this takes a single argument, which is the name of a class of queries to run
+
+The names of classes of queries are:
+
+``JPQLQueries``
+	Queries written in JPQL
+``MetamodelCriteriaQueries``
+	Queries written using the JPA static metamodel and criteria API
+``LiquidformQueries``
+	Queries written using LIQUidFORM
+``TartedUpLiquidformQueries``
+	Queries written using LIQUidFORM with a couple of helper functions to make them read better
+``QueryDSLQueries``
+	Queries written using QueryDSL
 
 Some interesting comparison of QueryDSL and the JPA criteria API can be found at <http://relation.to/10262.lace#comments> and <http://www.eclipse.org/forums/index.php/m/555770/>.
 
