@@ -15,6 +15,7 @@ public abstract class Query extends Statement {
         attempt("findIdeasOnAParticularStock", em);
         attempt("findIdeasWithBigInvestments", em);
         attempt("findAuthorsOfIdeasOnAParticularStock", em);
+        attempt("findPlagiarisingColleagues", em);
     }
     
     private void attempt(String name, EntityManager em) {
@@ -38,5 +39,9 @@ public abstract class Query extends Statement {
     public abstract TypedQuery<Idea> findIdeasWithBigInvestments(EntityManager em);
     
     public abstract TypedQuery<Author> findAuthorsOfIdeasOnAParticularStock(EntityManager em);
+
+    public TypedQuery<Author> findPlagiarisingColleagues(EntityManager em) {
+        throw new UnsupportedOperationException("this query has not been implemented in " + getClass().getSimpleName() + " because it is not particularly interesting");
+    }
     
 }
