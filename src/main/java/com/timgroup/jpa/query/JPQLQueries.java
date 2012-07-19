@@ -27,16 +27,16 @@ public class JPQLQueries extends Query {
     public TypedQuery<Author> findPlagiarisingColleagues(EntityManager em) {
         return em.createQuery(
                 "select b " +
-        		"from Author a join a.company c join c.authors b " +
-        		"where a.name = 'Gunther von Domicile' " +
-        		"and a <> b " +
-        		"and exists (" +
-            		"select i " +
-            		"from a.ideas i, b.ideas j " +
-            		"where i.stockTicker = j.stockTicker " +
-            		"and i.investment > 1500000 " +
-            		"and j.investment > 1500000)",
-        		Author.class);
+                "from Author a join a.company c join c.authors b " +
+                "where a.name = 'Gunther von Domicile' " +
+                "and a <> b " +
+                "and exists (" +
+                    "select i " +
+                    "from a.ideas i, b.ideas j " +
+                    "where i.stockTicker = j.stockTicker " +
+                    "and i.investment > 1500000 " +
+                    "and j.investment > 1500000)",
+                Author.class);
     }
     
 }
