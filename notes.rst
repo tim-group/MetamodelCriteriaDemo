@@ -23,3 +23,22 @@ Nobody would ever use this, so problems don't really matter.
 Verbose, like all JPA criteria stuff.
 
 The need to say ``author.joinSet("ideas")`` was a bit surprising. There is a ``join(SetAttribute)``, but i couldn't find a way to get a suitable SetAttribute instance.
+
+MetamodelCriteriaQueries
+========================
+
+The need to correlate attributes for subqueries was pretty unexpected.
+
+QueryDSL
+========
+
+Has some sort of Scala wrapper.
+
+Backends for things other than JPA - raw SQL, Mongo, Lucene, etc.
+
+Can't do correlated subqueries as nicely - have to start with a simple root
+
+General
+=======
+
+When writing a complex query, i tried to keep it on one big piece, like a JPQL query. But is this the right way to do it? You wouldn't do it for any other kind of code. There's a lot of complexity in there.
