@@ -18,11 +18,12 @@ public abstract class Query extends Statement {
     }
     
     private void attempt(String name, EntityManager em) {
+        System.out.println();
         System.out.println(name);
         System.out.println("================================================================================");
         System.out.flush();
         try {
-            Method method = getClass().getDeclaredMethod(name, EntityManager.class);
+            Method method = getClass().getMethod(name, EntityManager.class);
             @SuppressWarnings("unchecked")
             TypedQuery<Idea> query = (TypedQuery<Idea>) method.invoke(this, em);
             dumpQueryResults(query);
